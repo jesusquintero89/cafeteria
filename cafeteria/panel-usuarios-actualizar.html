@@ -13,6 +13,16 @@
             margin-top: auto !important;
         }
 
+        #sidebar ul li.active>a,
+        a[aria-expanded="true"]{
+            background:rgb(241, 241, 241);
+        }
+
+        #sidebar ul li.active>a,
+        a[aria-expanded="true"]{
+            background:rgb(241, 241, 241);
+        }
+
         a {
             color: #17a2b8;
         }
@@ -79,9 +89,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <span data-feather="home">Usuarios</span>
+                            <a href="#userSubmenu" class="nav-link active dropdown-toggle" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <span data-feather="shopping-cart">Usuarios</span>
                             </a>
+                            <ul class="collapse lisst-unstyled" id="userSubmenu">
+                                <li class="nav-link">
+                                    <a href="panel-usuarios-crear.html">Crear Usuario</a>
+                                </li>
+                                <li class="nav-link">
+                                    <a href="panel-usuarios-modificar.html">Modificar Usuarios</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a
@@ -90,9 +108,9 @@
                             data-toggle="collapse"
                             aria-expanded="false"
                             >
-                            <span data-feather="shopping-cart">Products</span>
+                            <span data-feather="shopping-cart">Productos</span>
                             </a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <ul class="collapse lisst-unstyled" id="homeSubmenu">
                             <li class="nav-link">
                                 <a href="create-producto.html">Ingresar Producto</a>
                             </li>
