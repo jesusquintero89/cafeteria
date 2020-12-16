@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, flash
-from wtforms import Form
-from Flask.grupob import forms
-from Flask.grupob.database import db_session
-from Flask.grupob.models import Usuario
+#from wtforms import Form
+#from Flask.grupob import forms
+#from Flask.grupob.database import db_session
+#from Flask.grupob.models import Usuario
 import sqlite3
 
 app = Flask(__name__)
@@ -50,16 +50,18 @@ def crearUsuario():
             nombre = request.form['nombre']
             apelllido = request.form['apellido']
             email = request.form['email']
+            
             with sqlite3.connect("brioche.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES("+nombre+","+email+")")
+                print("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES("+nombre+","+email+")")
+                cur.execute("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES('"+nombre+"','"+email+"')")
                 con.commit
                 msg = "Creado con exito"
         except:
             con.rollback()
             msg = "no se pudo"
         finally:
-            return render_template(panel-usuarios-crear.html, msg = msg)
+            return render_template('panel-usuarios-crear.html', msg = msg)
         #rol = request.form['rol']
 
 
