@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, flash
-from wtforms import Form
-from grupob import forms
-from grupob.database import db_session
-from grupob.models import Usuario
+#from wtforms import Form
+#from grupob import forms
+#from grupob.database import db_session
+#from grupob.models import Usuario
 
 
 app = Flask(__name__)
@@ -43,7 +43,15 @@ def home():
 
 @app.route("/usuario/crear", methods=['GET', 'POST'])
 def crearUsuario():
-    return render_template('panel-usuarios-crear.html')
+    if request.method == 'GET':
+        return render_template('panel-usuarios-crear.html')
+    else:
+        nombre = request.form['nombre']
+        apelllido = request.form['apellido']
+        email = request.form['email']
+        #rol = request.form['rol']
+        return 'usuario creado con exito'
+
 
 @app.route("/usuario/modificar", methods=['GET', 'POST'])
 def modificarUsuario():
@@ -57,7 +65,12 @@ def modificarUsuario():
 def crearProducto():
 
     if request.method == 'POST':
-        return render_template('home.html')
+
+        nombre = request.form['nombre']
+        cantidad = request.form['cantidad']
+        precio = request.form['precio']
+        return 'Producto creado con exito'
+        #return render_template('home.html')
 
     return render_template('create-producto.html')
 
