@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, flash
-#from wtforms import Form
-#from grupob import forms
-#from grupob.database import db_session
-#from grupob.models import Usuario
-
+from wtforms import Form
+from Flask.grupob import forms
+from Flask.grupob.database import db_session
+from Flask.grupob.models import Usuario
 
 app = Flask(__name__)
 
