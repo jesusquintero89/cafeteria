@@ -3,6 +3,7 @@ from wtforms import Form
 from Flask.grupob import forms
 from Flask.grupob.database import db_session
 from Flask.grupob.models import Usuario
+import sqlite3
 
 app = Flask(__name__)
 
@@ -45,11 +46,22 @@ def crearUsuario():
     if request.method == 'GET':
         return render_template('panel-usuarios-crear.html')
     else:
-        nombre = request.form['nombre']
-        apelllido = request.form['apellido']
-        email = request.form['email']
+        try:
+            nombre = request.form['nombre']
+            apelllido = request.form['apellido']
+            email = request.form['email']
+            with sqlite3.connect("brioche.db") as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES("+nombre+","+email+")")
+                con.commit
+                msg = "Creado con exito"
+        except:
+            con.rollback()
+            msg = "no se pudo"
+        finally:
+            return render_template(panel-usuarios-crear.html, msg = msg)
         #rol = request.form['rol']
-        return 'usuario creado con exito'
+
 
 
 @app.route("/usuario/modificar", methods=['GET', 'POST'])
