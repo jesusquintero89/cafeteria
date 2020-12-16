@@ -9,6 +9,11 @@
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/jesusquintero89/cafeteria@main/cafeteria/assets/media/cofee.ico" />
     
     <style> 
+    body{
+      background: white;
+      background-size: cover;
+      background-position: center;
+    }
     /* Imagen de fondo */
     #imgFondo { 
         background-image: url("static/images/cafeteria.jpeg") ;
@@ -27,26 +32,35 @@
       text-shadow: 1px 1px 5px blue;
     }
     .sidebar {
-            min-height: 89vh;
-        }
+        min-height: 89vh;
+    }
 
-        .mt-auto,
-        .my-auto {
-            margin-top: auto !important;
-        }
+    .mt-auto,
+    .my-auto {
+        margin-top: auto !important;
+    }
 
-        #sidebar ul li.active>a,
-        a[aria-expanded="true"]{
-            background:rgb(241, 241, 241);
-        }
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"]{
+        background:rgb(241, 241, 241);
+    }
 
-        a {
-            color: #17a2b8;
-        }
+    a {
+        color: #17a2b8;
+    }
+
+    .product-grid{
+      padding-bottom: 20px;
+      padding-top: 20px;
+    }
+
+    .product-grid:hover{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
     </style>
 </head>
 
-<body id="imgFondo" >
+<body>
     <!--Texto inicial TITULO-->
         <!-- Barra de navegacion superior -->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -111,25 +125,25 @@
           <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="row">
               <!--Primera columna-->
-                <div class="col-3"  style="background-color:#aaa" align="center"><br>
+                <!-- <div class="col-3"  style="background-color:#aaa" align="center"><br>
                   <h1>Usuario</h1> <br>
                   <p>Grupo B</p>
-                </div>
+                </div> -->
         
               <!--Segunda columna-->
-                <div class="col-6"  style="background-color:#bbb" align="center"><br>
-                  <h1>Listado de productos</h1> 
-                  <p>Seleccione los productos a vender</p>
+                <div class="col-12"  style="background-color:#bbb" align="center"><br>
+                  <!-- <h1 class="h2">Listado de productos</h1>  -->
+                  <!-- <p>Seleccione los productos a vender</p>   -->
                 
                   <div>
                     <table border="1" align="center">
-                      <th><label><b>Producto a buscar</b></label>
-                          <input type="search" placeholder="Producto a buscar">
-                          <input type="button" name="Buscar" value="Buscar">
+                      <th><label>Buscar Producto:</label>
+                          <input type="search" placeholder="Ej. Cafe">
+                          <button type="button" class="btn btn-dark">Buscar</button>
                       </th>
                     </table>
                     <br>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class=col-2>
                         <h4><u>Cantidad</u></h4>
                       </div>
@@ -139,23 +153,34 @@
                       <div class=col-3>
                         <h4><u>Valor unitario</u></h4>
                       </div>
-                  </div>
+                  </div> -->
         
                   </div>
                 </div>
         
               <!--Tercera columna-->
-                <div class="col-3"  style="background-color:#ccc" align="center"><br>
+                <!-- <div class="col-3"  style="background-color:#ccc" align="center"><br>
                   <h3>Productos a facturar</h3>
                 </div>      
-              </div>
+              </div> -->
         
               <!--Tercera fila de trabajo dividida en 3 columnas para trabajar con la columna 2 y la columna 3(Productos a facturar)-->
               <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
-                  <div class="row" id="letraMenu">
-                    <!--Columna de cantidad-->
+                <!-- <div class="col-3"></div> -->
+                <div class="col-8">
+                  <div class="col-md-4 product-grid">
+                    <div class="image">
+                      <a href="#">
+                        <img src="../static/images/cafe.jpg" class="w-100">
+                      </a>
+                    </div>
+                    <h5 class="text-center">Cafe</h5>
+                    <h6>Precio $ 1000</h6>
+                    <a href="#" class="btn">Comprar</a>
+                  </div>  
+                </div>
+                  <!-- <div class="row" id="letraMenu">
+
                     <div class="col-2" align="center" id="letraMenu">             
                       <p>n1</p><hr>
                       <p>n2</p><hr>
@@ -163,7 +188,7 @@
                       <p>n4</p><hr>
                       <p>n5</p><hr>
                     </div>
-                    <!--Columna de producto-->
+
                     <div class="col-7">
                       <p>Producto A</p><hr>
                       <p>Producto B</p><hr>
@@ -171,7 +196,7 @@
                       <p>Producto Y</p><hr>
                       <p>Producto Z</p><hr>
                     </div>
-                    <!--Columna de precio unitario-->
+
                     <div class="col-3" align="right">
                       <p>Precio A</p><hr>
                       <p>Precio B</p><hr>
@@ -179,7 +204,47 @@
                       <p>Precio Y</p><hr>
                       <p>Precio Z</p><hr>
                     </div>
-                  </div>
+                  </div> -->
+                </div>
+                <div class="col-md-4 order-md-auto mb-4">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Listado de Productos</span>
+                    <span class="badge badge-secondary badge-pill">3</span>
+                  </h4>
+                  <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Cafe</h6>
+                        <small class="text-muted">Cantidad: 1</small>
+                      </div>
+                      <span class="text-muted">$2000</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Gaseosa</h6>
+                        <small class="text-muted">Cantidad: 1</small>
+                      </div>
+                      <span class="text-muted">$1500</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Pastel</h6>
+                        <small class="text-muted">Cantidad: 2</small>
+                      </div>
+                      <span class="text-muted">$4000</span>
+                    </li>
+                    <!-- <li class="list-group-item d-flex justify-content-between bg-light">
+                      <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>EXAMPLECODE</small>
+                      </div>
+                      <span class="text-success">-$5</span>
+                    </li> -->
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span>Total</span>
+                      <strong>$7500</strong>
+                    </li>
+                  </ul>
                 </div>
                 <!--Tabla de los productos a facturar-->
                 <!--<div class="card-body">-->
