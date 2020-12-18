@@ -16,7 +16,7 @@ def login():
             password_login = request.form['password']
             with sqlite3.connect("brioche.db") as con:
                 cur = con.cursor()
-                cur.execute("SELECT COUNT(*) FROM USUARIOS WHERE NOMBRE = '" + username_login + "' AND CONTRASENA = '" + password_login + "'")
+                cur.execute("SELECT COUNT(*) FROM USUARIOS WHERE NOMBRE = '" + username_login + "' AND CONTRASENA = '" + password_login + "' AND ESTADO = 'activo'")
                 data = cur.fetchone()[0]
                 if data == 0:
                     msg = 'Usuario Invalido'
@@ -35,24 +35,24 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route("/registro", methods=['GET', 'POST'])
-def registro():
-    crea_registro = forms.Crearegistro(request.form)
-    if request.method == 'POST':
-        if crea_registro.validate():
-            usuario = Usuario(name = crea_registro.username.data,
-                            contraseña= crea_registro.password.data,
-                            correo= crea_registro.email.data)
+# @app.route("/registro", methods=['GET', 'POST'])
+# def registro():
+#     crea_registro = forms.Crearegistro(request.form)
+#     if request.method == 'POST':
+#         if crea_registro.validate():
+#             usuario = Usuario(name = crea_registro.username.data,
+#                             contraseña= crea_registro.password.data,
+#                             correo= crea_registro.email.data)
 
-            db.session.add(usuario)
-            db.session.commit()
+#             db.session.add(usuario)
+#             db.session.commit()
 
-            success_message = 'Usuario registrado con exito'
-            flash(success_message)
-        else:
-            pass
+#             success_message = 'Usuario registrado con exito'
+#             flash(success_message)
+#         else:
+#             pass
 
-    return render_template('registro.html', form = crea_registro)
+#     return render_template('registro.html', form = crea_registro)
 
 
 
@@ -68,20 +68,22 @@ def crearUsuario():
     else:
         try:
             nombre = request.form['nombre']
-            apelllido = request.form['apellido']
+            contrasena = request.form['contrasena']
             email = request.form['email']
+            # rol = request.form['rol']
+            rol = 'Cajero'
             
             with sqlite3.connect("brioche.db") as con:
                 cur = con.cursor()
-                print("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES("+nombre+","+email+")")
-                cur.execute("INSERT INTO USUARIOS (NOMBRE,CORREO) VALUES('"+nombre+"','"+email+"')")
+                print("INSERT INTO USUARIOS (NOMBRE,CONTRASENA,CORREO,ROL,ESTADO) VALUES('"+nombre+"','"+contrasena+"','"+email+"','"+rol+"','activo')")
+                cur.execute("INSERT INTO USUARIOS (NOMBRE,CONTRASENA,CORREO,ROL,ESTADO) VALUES('"+nombre+"','"+contrasena+"','"+email+"','"+rol+"','activo')")
                 con.commit
-                msg = "Creado con exito"
+                msg_1 = "Creado con exito"
         except:
             con.rollback()
-            msg = "no se pudo"
+            msg_1 = "no se pudo"
         finally:
-            return render_template('panel-usuarios-crear.html', msg = msg)
+            return render_template('panel-usuarios-crear.html', msg = msg_1)
         #rol = request.form['rol']
 
 
@@ -98,14 +100,30 @@ def modificarUsuario():
 def crearProducto():
 
     if request.method == 'POST':
+        try:
+            nombre = request.form['nombre']
+            cantidad = request.form['cantidad']
+            precio = request.form['precio']
 
-        nombre = request.form['nombre']
-        cantidad = request.form['cantidad']
-        precio = request.form['precio']
-        return 'Producto creado con exito'
+            with sqlite3.connect("brioche.db") as con:
+                cur = con.cursor()
+                # print("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")
+                print("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")")
+                cur.execute("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")")
+                con.commit
+                msg = "Creado con producto con exito"
+        except:
+            con.rollback()
+            msg = "no se pudo"
+        finally:
+            return render_template('create-producto.html', msg = msg)
         #return render_template('home.html')
+    else:
+        return render_template('create-producto.html')
 
-    return render_template('create-producto.html')
+@app.route("/producto/listar", methods=['GET', 'POST'])
+def listarProducto():
+    return render_template("list-producto.html")
 
 @app.route("/ventas")
 def ventas():
