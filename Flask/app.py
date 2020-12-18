@@ -11,10 +11,30 @@ app = Flask(__name__)
 
 def login():
     if request.method == 'POST':
-        return render_template('home.html')
+        try:
+            username_login = request.form['username']
+            password_login = request.form['password']
+            with sqlite3.connect("brioche.db") as con:
+                cur = con.cursor()
+                cur.execute("SELECT COUNT(*) FROM USUARIOS WHERE NOMBRE = '" + username_login + "' AND CONTRASENA = '" + password_login + "'")
+                data = cur.fetchone()[0]
+                if data == 0:
+                    msg = 'Usuario Invalido'
+                else:
+                    msg = 'Usuario Valido'
+        except:
+            con.rollback()
+            msg = 'Error'
+        finally:
+            if msg == 'Usuario Valido':
+                return render_template('home.html', msg = msg)
+            elif msg == 'Usuario Invalido':
+                return render_template('login.html', msg = msg)
+            else:
+                return render_template('login.html', msg = msg)
     else:
-
         return render_template('login.html')
+
 @app.route("/registro", methods=['GET', 'POST'])
 def registro():
     crea_registro = forms.Crearegistro(request.form)

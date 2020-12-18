@@ -57,6 +57,10 @@
     .product-grid:hover{
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+
+    .image{
+      position: relative;
+    }
     </style>
 </head>
 
@@ -167,17 +171,52 @@
               <!--Tercera fila de trabajo dividida en 3 columnas para trabajar con la columna 2 y la columna 3(Productos a facturar)-->
               <div class="row">
                 <!-- <div class="col-3"></div> -->
-                <div class="col-8">
-                  <div class="col-md-4 product-grid">
+                <div class="col-md-8">
+                  <div class="col-md-2 product-grid">
                     <div class="image">
                       <a href="#">
-                        <img src="../static/images/cafe.jpg" class="w-100">
+                        <img src="../static/images/croissant.png" class="w-100">
                       </a>
                     </div>
-                    <h5 class="text-center">Cafe</h5>
-                    <h6>Precio $ 1000</h6>
-                    <a href="#" class="btn">Comprar</a>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Cafe</h6>                        
+                      </div>
+                      <span class="text-muted">$1000</span>
+                    </li>                    
+                    <a href="#" class="btn">Agregar</a>
                   </div>  
+
+                  <div class="col-md-2 product-grid">
+                    <div class="image">
+                      <a href="#">
+                        <img src="../static/images/croissant.png" class="w-100">
+                      </a>
+                    </div>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Cafe</h6>                        
+                      </div>
+                      <span class="text-muted">$1000</span>
+                    </li>                    
+                    <a href="#" class="btn">Agregar</a>
+                  </div>  
+
+                  <div class="col-md-2 product-grid">
+                    <div class="image">
+                      <a href="#">
+                        <img src="../static/images/croissant.png" class="w-100">
+                      </a>
+                    </div>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                      <div>
+                        <h6 class="my-0">Cafe</h6>                        
+                      </div>
+                      <span class="text-muted">$1000</span>
+                    </li>                    
+                    <a href="#" class="btn">Agregar</a>
+                  </div>  
+                  
                 </div>
                   <!-- <div class="row" id="letraMenu">
 
@@ -205,47 +244,48 @@
                       <p>Precio Z</p><hr>
                     </div>
                   </div> -->
+                  <div class="col-md-4 order-md-auto mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                      <span class="text-muted">Listado de Productos</span>
+                      <span class="badge badge-secondary badge-pill">3</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                      <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                          <h6 class="my-0">Cafe</h6>
+                          <small class="text-muted">Cantidad: 1</small>
+                        </div>
+                        <span class="text-muted">$2000</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                          <h6 class="my-0">Gaseosa</h6>
+                          <small class="text-muted">Cantidad: 1</small>
+                        </div>
+                        <span class="text-muted">$1500</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                          <h6 class="my-0">Pastel</h6>
+                          <small class="text-muted">Cantidad: 2</small>
+                        </div>
+                        <span class="text-muted">$4000</span>
+                      </li>
+                      <!-- <li class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-success">
+                          <h6 class="my-0">Promo code</h6>
+                          <small>EXAMPLECODE</small>
+                        </div>
+                        <span class="text-success">-$5</span>
+                      </li> -->
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong>$7500</strong>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="col-md-4 order-md-auto mb-4">
-                  <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Listado de Productos</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
-                  </h4>
-                  <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                      <div>
-                        <h6 class="my-0">Cafe</h6>
-                        <small class="text-muted">Cantidad: 1</small>
-                      </div>
-                      <span class="text-muted">$2000</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                      <div>
-                        <h6 class="my-0">Gaseosa</h6>
-                        <small class="text-muted">Cantidad: 1</small>
-                      </div>
-                      <span class="text-muted">$1500</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                      <div>
-                        <h6 class="my-0">Pastel</h6>
-                        <small class="text-muted">Cantidad: 2</small>
-                      </div>
-                      <span class="text-muted">$4000</span>
-                    </li>
-                    <!-- <li class="list-group-item d-flex justify-content-between bg-light">
-                      <div class="text-success">
-                        <h6 class="my-0">Promo code</h6>
-                        <small>EXAMPLECODE</small>
-                      </div>
-                      <span class="text-success">-$5</span>
-                    </li> -->
-                    <li class="list-group-item d-flex justify-content-between">
-                      <span>Total</span>
-                      <strong>$7500</strong>
-                    </li>
-                  </ul>
-                </div>
+                
                 <!--Tabla de los productos a facturar-->
                 <!--<div class="card-body">-->
                 <div class="col-3">
