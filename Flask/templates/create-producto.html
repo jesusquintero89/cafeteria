@@ -133,7 +133,7 @@
           <div class="card">
             <h5 class="card-header">Formulario de Registro de Productos</h5>
             <div class="card-body">
-              <form action="/producto/crear" method="post">
+              <form action="/producto/crear" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre">Nombre</label>
@@ -142,6 +142,7 @@
                       name="nombre"
                       id="nombre"
                       class="form-control"
+                      required
                     />
                   </div>
                   <div class="form-group col-md-6">
@@ -151,6 +152,7 @@
                       name="cantidad"
                       id="cantidad"
                       class="form-control"
+                      required
                     />
                   </div>
                 </div>
@@ -162,6 +164,7 @@
                       name="precio"
                       id="precio"
                       class="form-control"
+                      required
                     />
                   </div>
                   <div class="form-group col-md-6">
@@ -174,18 +177,19 @@
                     />-->
                     <label for="imagen">Imagen</label>
                     <div class="input-group mb-3">
-                      <div class="input-group-prepend"></div>
                       <div class="custom-file">
                         <input
+                          name="image"
                           type="file"
                           class="custom-file-input"
                           id="inputGroupFile01"
+                          accept="image/*"
                           aria-describedby="inputGroupFileAddon01"
+                          required
                         />
                         <label class="custom-file-label" for="inputGroupFile01"
                           >Seleccionar archivo</label
                         >
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -221,5 +225,10 @@
       integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
       crossorigin="anonymous"
     ></script>
+    <script>
+      $(document).on('change', '.custom-file-input', function (event) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name);
+      })
+  </script>
   </body>
 </html>
