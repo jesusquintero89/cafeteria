@@ -94,11 +94,40 @@ def crearUsuario():
 
 @app.route("/usuario/modificar", methods=['GET', 'POST'])
 def modificarUsuario():
-
+    
     if request.method == 'POST':
         return render_template('home.html')
+    else:
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM USUARIOS")
+        rows = cur.fetchall()
+        return render_template('panel-usuarios-modificar.html', rows = rows)
 
-    return render_template('panel-usuarios-modificar.html')
+@app.route("/usuario/actualizar/<string:id>", methods=['GET', 'POST'])
+def actualizarUsuario(id):
+
+    if request.method == 'POST':
+        try:
+            with sqlite3.connect("brioche.db") as con:
+                cur = con.cursor()
+                cur.execute("DELETE FROM USUARIOS WHERE IDUSUARIO = " + id)
+                con.commit
+                # con.row_factory = sqlite3.Row
+                # cur.execute("SELECT * FROM USUARIOS")
+                # rows = cur.fetchall()
+        except:
+            con.rollback()
+        finally:
+            return redirect("/usuario/modificar")
+    else:
+        con = sqlite3.connect("brioche.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT NOMBRE, CORREO, ROL FROM USUARIOS WHERE IDUSUARIO = "+ id )
+        rows = cur.fetchall()
+        return render_template('panel-usuarios-actualizar.html', rows = rows)
 
 @app.route("/producto/crear", methods=['GET', 'POST'])
 def crearProducto():
