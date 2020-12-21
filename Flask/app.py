@@ -4,8 +4,12 @@ from flask import Flask, render_template, request, redirect, flash
 #from Flask.grupob.database import db_session
 #from Flask.grupob.models import Usuario
 import sqlite3
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_PATH'] = 'static/images'
 
 @app.route("/login", methods=['GET', 'POST'])
 
@@ -104,14 +108,16 @@ def crearProducto():
             nombre = request.form['nombre']
             cantidad = request.form['cantidad']
             precio = request.form['precio']
+            image = request.files['image']
+            image_name = secure_filename(image.filename)
 
             with sqlite3.connect("brioche.db") as con:
                 cur = con.cursor()
-                # print("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")
-                print("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")")
-                cur.execute("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO) VALUES('"+nombre+"',"+cantidad+","+precio+")")
+                print("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO,IMAGEN) VALUES ('"+nombre+"',"+cantidad+","+precio+",'"+image_name+"')")
+                image.save(os.path.join(app.config['UPLOAD_PATH'], image_name))
+                cur.execute("INSERT INTO PRODUCTO (NOMBRE,CANTIDAD,PRECIO_UNITARIO,IMAGEN) VALUES (?,?,?,?)", (nombre,cantidad,precio,image_name))
                 con.commit
-                msg = "Creado con producto con exito"
+                msg = "Creado producto con exito"
         except:
             con.rollback()
             msg = "no se pudo"
@@ -123,7 +129,11 @@ def crearProducto():
 
 @app.route("/producto/listar", methods=['GET', 'POST'])
 def listarProducto():
-    return render_template("list-producto.html")
+    with sqlite3.connect("brioche.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM PRODUCTO")
+        data = cur.fetchall()
+    return render_template("list-producto.html", data=data)
 
 @app.route("/ventas")
 def ventas():
