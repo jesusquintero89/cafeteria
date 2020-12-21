@@ -102,61 +102,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Astrid Moncada</td>
-                                        <td>Astrid@grupob.com</td>
-                                        <td>Admin</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>Edwin Rodriguez</td>
-                                        <td>Edwin@grupob.com</td>
-                                        <td>Cajero</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>Diego Felipe Monroy</td>
-                                        <td>Diego@grupob.com</td>
-                                        <td>Cajero</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>Jesus David Quintero</td>
-                                        <td>Jesus@grupob.com</td>
-                                        <td>Cajero</td>
-                                        <td>Inactivo</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>5</th>
-                                        <td>Brayan Steven Garzon</td>
-                                        <td>Brayan@grupob.com</td>
-                                        <td>Cajero</td>
-                                        <td>Activo</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </td>
-                                    </tr>
+                                    {% for row in rows %}
+                                        <tr>
+                                            <th scope="row">{{row["IDUSUARIO"]}}</th>
+                                            <td>{{row["NOMBRE"]}}</td>
+                                            <td>{{row["CORREO"]}}</td>
+                                            <td>{{row["ROL"]}}</td>
+                                            <td>{{row["ESTADO"]}}</td>
+                                            <td>
+                                                <a href="/usuario/actualizar/{{row.IDUSUARIO}}" class="btn btn-info btn-sm">Actualizar</a>
+                                                <form action="/usuario/actualizar/{{row.IDUSUARIO}}" method="POST">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

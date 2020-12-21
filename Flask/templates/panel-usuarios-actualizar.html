@@ -82,11 +82,11 @@
 
     <div class="container-fluid">
         <div class="row">
-                <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar" id="sidebarMenu">
-                    <div class="sidebar-stiky pt-3">
-                        <ul class="nav flex-column">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar" id="sidebarMenu">
+                <div class="sidebar-stiky pt-3">
+                    <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="home.html" class="nav-link">
+                            <a href="/home" class="nav-link">
                             <span data-feather="home">Home</span>
                             </a>
                         </li>
@@ -96,39 +96,34 @@
                             </a>
                             <ul class="collapse lisst-unstyled" id="userSubmenu">
                                 <li class="nav-link">
-                                    <a href="{{ url_for('crearUsuario') }}">Crear Usuario</a>
+                                    <a href="/usuario/crear">Crear Usuario</a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="panel-usuarios-modificar.html">Modificar Usuarios</a>
+                                    <a href="/usuario/modificar">Modificar Usuarios</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a
-                            href="#homeSubmenu"
-                            class="nav-link active dropdown-toggle"
-                            data-toggle="collapse"
-                            aria-expanded="false"
-                            >
-                            <span data-feather="shopping-cart">Productos</span>
+                            <a href="#homeSubmenu" class="nav-link active dropdown-toggle" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <span data-feather="shopping-cart">Productos</span>
                             </a>
                             <ul class="collapse lisst-unstyled" id="homeSubmenu">
-                            <li class="nav-link">
-                                <a href="create-producto.html">Ingresar Producto</a>
-                            </li>
-                            <li class="nav-link">
-                                <a href="list-producto.html">Listar Productos</a>
-                            </li>
+                                <li class="nav-link">
+                                    <a href="/producto/crear">Ingresar Producto</a>
+                                </li>
+                                <li class="nav-link">
+                                    <a href="list-producto.html">Listar Productos</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="Ventas.html" class="nav-link">
+                            <a href="/ventas" class="nav-link">
                             <span data-feather="home">Venta</span>
                             </a>
                         </li>
-                        </ul>
-                    </div>
-                </nav>
+                    </ul>
+                </div>
+            </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3 mb-3 border-bottom">
                     <h1 class="h2">Panel de Usuarios</h1>
@@ -146,28 +141,30 @@
                     <h5 class="card-header">Formulario de Actualizacion de Usuario</h5>
                     <div class="card-body">
                       <form action="/usuario/modificar" method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="nombre">Nombre(s) *</label>
-                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="" value="Astrid" required/>
+                        {% for row in rows %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nombre">Nombre(s) *</label>
+                                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="" value="{{row.NOMBRE}}" required/>
+                                </div>
+                                <!-- <div class="form-group col-md-6">
+                                    <label for="cantidad">Apellido(s) *</label>
+                                    <input type="text" name="apellido" id="apellido" class="form-control" placeholder="" value="Moncada" required/>
+                                </div> -->
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="cantidad">Apellido(s) *</label>
-                                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="" value="Moncada" required/>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="precio">E-mail *</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="" value="{{row.CORREO}}" required/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="precio">Rol</label>
+                                    <input type="text" name="rol" id="rol" class="form-control" disabled value="{{row.ROL}}" required/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="precio">E-mail *</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="" value="Astrid@grupob.com" required/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="precio">Rol</label>
-                                <input type="text" name="rol" id="rol" class="form-control" disabled value="Cajero" required/>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-lg">Registrar</button>
-                        <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
+                            <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            <a href="/usuario/modificar" class="btn btn-danger btn-lg">Cancelar</a>
+                        {% endfor %}
                       </form>
                     </div>
                 </div>
