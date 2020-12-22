@@ -58,7 +58,7 @@ def login():
 
 #     return render_template('registro.html', form = crea_registro)
 
-
+db = url_for('brioche.db')
 
 
 @app.route("/home")
@@ -98,7 +98,7 @@ def modificarUsuario():
     if request.method == 'POST':
         return render_template('home.html')
     else:
-        con = sqlite3.connect("brioche.db")
+        con = sqlite3.connect(db)
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT * FROM USUARIOS")
